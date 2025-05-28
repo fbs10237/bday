@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday Jhinuk</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Foldit:wght@700&display=swap');
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Bebas Neue', cursive;
+      background: linear-gradient(135deg, #4a2470 0%, #2f3e7a 50%, #ffffff 100%);
+      color: black;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    /* Welcome Modal */
+    #welcomeModal {
+      position: fixed;
+      inset: 0;
+      background: rgba(70, 0, 120, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    #welcomeContent {
+      background: white;
+      padding: 2rem 2.5rem;
+      max-width: 420px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px #5600a0;
+      text-align: center;
+    }
+    #enterBtn {
+      margin-top: 1rem;
+      background: #6e4cae;
+      border: none;
+      padding: 0.7rem 1.8rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #enterBtn:hover {
+      background: #542a85;
+    }
+
+    #mainContent { display: none; width: 100%; max-width: 1100px; text-align: center; }
+
+    #mainPhoto {
+      max-width: 180px;
+      border-radius: 50%;
+      border: 6px solid #6e4cae;
+      box-shadow: 0 0 15px #ab7ddb;
+      margin: 1rem auto 0.6rem;
+      object-fit: cover;
+      width: 90vw;
+    }
+
+    #happyBirthday {
+      font-family: 'Foldit', cursive;
+      font-weight: 700;
+      font-size: 3rem;
+      color: black;
+      margin-bottom: 1rem;
+    }
+    #happyBirthday span {
+      display: inline-block;
+      animation: waveColor 2.5s ease-in-out infinite;
+      animation-fill-mode: forwards;
+    }
+    @keyframes waveColor {
+  0%, 100% { color: red; transform: translateY(0); }
+  50% { color: #ff6666; transform: translateY(-8px); }
+}
+    #candles {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 2rem;
+    }
+    .candle {
+      position: relative;
+      width: 12px;
+      height: 60px;
+      background: #6e4cae;
+      border-radius: 4px;
+    }
+    .flame {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      width: 14px;
+      height: 24px;
+      background: radial-gradient(circle at 50% 50%, #ffd54f 0%, #ff6f00 80%);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      animation: flicker 1.3s infinite alternate ease-in-out;
+    }
+    @keyframes flicker {
+      0% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(calc(-50% + 2px)) scale(1.1); }
+      100% { transform: translateX(-50%) scale(1); }
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 20px;
+    }
+    @media (max-width: 768px) {
+      .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 480px) {
+      .photo-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .photo-card {
+      border-radius: 12px;
+      overflow: hidden;
+      background: white;
+      box-shadow: 0 0 8px #9673bf;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .photo-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 14px #6e4cae;
+    }
+    .photo-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .special-card {
+      border: 3px dashed #ff69b4;
+      position: relative;
+    }
+    .special-card::before {
+      content: "🎁 Surprise!";
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #fff0f5;
+      color: #d63384;
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    #memoryPopup {
+      position: fixed;
+      inset: 0;
+      background: rgba(70, 0, 120, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1500;
+    }
+    #memoryPopup .popup-content {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 25px #6e4cae;
+      max-width: 320px;
+    }
+    #memoryPopup .popup-content button {
+      background: #6e4cae;
+      border: none;
+      padding: 0.5rem 1.3rem;
+      color: white;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="welcomeModal">
+    <div id="welcomeContent">
+      <h2>Welcome Jhinuk!</h2>
+      <p>Today is your special day, full of joy and love.</p>
+      <p>Happy Birthday, Mahbuba Afrin Jhinuk!</p>
+      <button id="enterBtn">Enter Website</button>
+    </div>
+  </div>
+
+  <div id="mainContent">
+    <img id="mainPhoto" src="13.jpeg" alt="Main Photo" />
+    <div id="happyBirthday"></div>
+    <div id="candles">
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
+    </div>
+
+    <div class="photo-grid" id="photoGallery"></div>
+  </div>
+
+  <div id="memoryPopup">
+    <div class="popup-content">
+      <p id="memoryDesc"></p>
+      <button id="memoryClose">Close</button>
+    </div>
+  </div>
+
+  <audio id="bg-audio" src="happy-birthday.mp3" preload="auto" loop></audio>
+
+  <script>
+    const happyBirthdayText = "Happy Birthday Jhinuk";
+    const happyBirthday = document.getElementById("happyBirthday");
+    happyBirthday.innerHTML = happyBirthdayText.split("").map((char, i) =>
+      `<span style="--i:${i}">${char === " " ? "&nbsp;" : char}</span>`
+    ).join("");
+
+    const photos = [
+      {src: "1.jpeg", memory: "The first day we sat together... I felt like time stopped, and in that moment, I knew you were going to mean something incredibly special to me."},
+      {src: "2.jpeg", memory: "The day we went to Ramna Park for the first time."},
+      {src: "3.jpeg", memory: "One of our best couple pictures with a beautiful sunset."},
+      {src: "4.jpeg", memory: "The first day I proposed to you with a flower, down on one knee."},
+      {src: "5.jpeg", memory: "This expression of yours—I really love it."},
+      {src: "6.jpeg", memory: "My white angel, you looked the most beautiful in that white attire."},
+      {src: "8.jpeg", memory: "Our first date at Bubble, and the first time you said 'I love you' freely."},
+      {src: "10.jpeg", memory: "We celebrated your first birthday together. This picture was the best one from that day."},
+      {src: "12.jpeg", memory: "I want to look at you all the time. Every day. Every second. I'm falling in love with you."},
+      {src: "14.jpeg", memory: "The first time you went far away from home with me. I still wonder how you trusted me enough."},
+      {src: "1111.jpeg", memory: "The first step to making you mine forever."},
+      {src: "111.jpeg", memory: "Your childhood—featuring little Takla Jhinuk."}
+    ];
+
+    const gallery = document.getElementById("photoGallery");
+    const memoryPopup = document.getElementById("memoryPopup");
+    const memoryDesc = document.getElementById("memoryDesc");
+    const memoryClose = document.getElementById("memoryClose");
+
+    photos.forEach(({src, memory, special}, idx) => {
+      const card = document.createElement("div");
+      card.className = "photo-card";
+      if (special) card.classList.add("special-card");
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = `Memory photo ${idx + 1}`;
+      card.appendChild(img);
+      card.addEventListener("click", () => {
+        memoryDesc.textContent = memory;
+        memoryPopup.style.display = "flex";
+      });
+      gallery.appendChild(card);
+    });
+
+    memoryClose.addEventListener("click", () => {
+      memoryPopup.style.display = "none";
+    });
+
+    const audio = document.getElementById("bg-audio");
+    const welcomeModal = document.getElementById("welcomeModal");
+    const mainContent = document.getElementById("mainContent");
+    const enterBtn = document.getElementById("enterBtn");
+
+    enterBtn.addEventListener("click", () => {
+      welcomeModal.style.display = "none";
+      mainContent.style.display = "block";
+      audio.play().catch(() => {
+        console.warn("Autoplay failed.");
+      });
+    });
+  </script>
+</body>
+</html>
