@@ -72,7 +72,7 @@
       font-weight: 700;
       font-size: 3rem;
       color: black;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
     #happyBirthday span {
       display: inline-block;
@@ -80,9 +80,22 @@
       animation-fill-mode: forwards;
     }
     @keyframes waveColor {
-  0%, 100% { color: red; transform: translateY(0); }
-  50% { color: #ff6666; transform: translateY(-8px); }
-}
+      0%, 100% { color: red; transform: translateY(0); }
+      50% { color: #ff6666; transform: translateY(-8px); }
+    }
+
+    /* Clock Styling */
+    #currentTime {
+      font-size: 1.3rem;
+      color: white;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.3rem 1rem;
+      border-radius: 8px;
+      display: inline-block;
+    }
+
     #candles {
       display: flex;
       justify-content: center;
@@ -208,6 +221,11 @@
   <div id="mainContent">
     <img id="mainPhoto" src="13.jpeg" alt="Main Photo" />
     <div id="happyBirthday"></div>
+    <div id="currentTime"></div>
+    <br>
+    <br>
+    <br>
+    <div></div>
     <div id="candles">
       <div class="candle"><div class="flame"></div></div>
       <div class="candle"><div class="flame"></div></div>
@@ -285,6 +303,15 @@
         console.warn("Autoplay failed.");
       });
     });
+
+    // Clock
+    function updateClock() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString();
+      document.getElementById("currentTime").textContent = `Current Time: ${timeStr}`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
   </script>
 </body>
 </html>
